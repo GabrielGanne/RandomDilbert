@@ -43,14 +43,13 @@ class RandomDilbert:
         gtk.main_quit()
     
     def get_random_image(self):
-        year = random.choice(["2011", "2012", "2013"])
+        year = random.choice(range(1990, 2014))
         month = random.choice(range(1, 13))
         day = random.choice(range(1, 29))
         url_to_dilbert_page = "http://www.dilbert.com/%s-%s-%s/" % (year, month, day)
         page_contents = urllib.urlopen(url_to_dilbert_page).read()
-        image_url = re.search('<a href="/strips/comic/.*?/"><img onload=".*?" src="(.*?)" alt="The Official Dilbert Website featuring Scott Adams Dilbert strips, animations and more" border="0" /></a>', page_contents).group(1)
-        image_url = "http://www.dilbert.com" + image_url
-        #print image_url
+        image_hash = re.search('<meta property="og:image" content="http://assets.amuniversal.com/([0-9a-fA-F]*)"/>', page_contents).group(1)
+        image_url = "http://assets.amuniversal.com/" + image_hash
         return image_url
     
     def show_random_image(self, widget=None, data=None):
@@ -58,3 +57,4 @@ class RandomDilbert:
 
 if __name__ == "__main__":
     RandomDilbert().show()
+
