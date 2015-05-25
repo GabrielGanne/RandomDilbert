@@ -2,14 +2,16 @@
 import pygtk
 pygtk.require("2.0")
 import gtk
+import os
 
 import random
 import urllib
-import re
 
+URL_FILE = os.path.join(os.path.dirname(__file__), 'img_urls.txt')
 
 DILBERT_URL_PATTERN = "http://www.dilbert.com/strip/%s-%s-%s/"
 DILBERT_IMG_URL = "http://assets.amuniversal.com/"
+
 
 def pixbuf_from_url(url):
     image_data = urllib.urlopen(url)
@@ -17,6 +19,7 @@ def pixbuf_from_url(url):
     loader.write(image_data.read())
     loader.close()
     return loader.get_pixbuf()
+
 
 class RandomDilbert:
     def __init__(self):
@@ -47,14 +50,9 @@ class RandomDilbert:
         gtk.main_quit()
 
     def get_random_image(self):
-        year = random.choice(range(2009, 2015))
-        month = random.choice(range(1, 13))
-        day = random.choice(range(1, 29))
-        url_to_dilbert_page = DILBERT_URL_PATTERN % (year, month, day)
-        page_contents = urllib.urlopen(url_to_dilbert_page).read()
-        image_hash = re.search('<meta property="og:image" content="http://assets.amuniversal.com/([0-9a-fA-F]*)"/>', page_contents).group(1)
+        lines = open(URL_FILE).read().splitlines()
+        image_hash =random.choice(lines)
         image_url = DILBERT_IMG_URL + image_hash
-
         return image_url
 
     def show_random_image(self, widget=None, data=None):
