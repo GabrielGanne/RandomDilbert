@@ -2,15 +2,11 @@
 import pygtk
 pygtk.require("2.0")
 import gtk
-import os
 
 import random
 import urllib
 
-URL_FILE = os.path.join(os.path.dirname(__file__), 'img_urls.txt')
-
-DILBERT_URL_PATTERN = "http://www.dilbert.com/strip/%s-%s-%s/"
-DILBERT_IMG_URL = "http://assets.amuniversal.com/"
+from settings import URL_FILE, DILBERT_IMG_URL
 
 
 def pixbuf_from_url(url):
