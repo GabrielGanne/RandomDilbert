@@ -22,7 +22,7 @@ class RandomDilbert:
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.window.set_position(gtk.WIN_POS_CENTER)
         self.window.set_default_size(670, 430)
-        self.window.set_title("RandomDilbert Client by GKBRK")
+        self.window.set_title("Random Dilbert")
         
         self.image = gtk.Image()
         self.show_random_image()
