@@ -1,13 +1,10 @@
 from __future__ import print_function
 
-import os
 import urllib2
 import re
 
-DILBERT_URL_PATTERN = "http://www.dilbert.com/strip/%s-%s-%s/"
-DILBERT_IMG_URL = "http://assets.amuniversal.com/"
+from settings import URL_FILE, DILBERT_URL_PATTERN
 
-URL_FILE = os.path.join(os.path.dirname(__file__), 'img_urls.txt')
 img_pattern = re.compile('<meta property="og:image" content="http://assets.amuniversal.com/([0-9a-fA-F]*)"/>')
 
 
